@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Spark Printer Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/jumbotron-narrow.css" rel="stylesheet">
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-overrides.css" rel="stylesheet">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/faye-browser.js"></script>
+
+    <script src="./js/printer.js"></script>
+   
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            
+          </ul>
+        </nav>
+        <h3 class="text-muted">Spark Printer Simulator</h3>
+      </div>
+
+      <div class="jumbotron span12">
+        <p><div class="center-block lcd"></div></p>
+
+        <p><textarea class="field log" id="log" rows="6" cols="75" placeholder="Printer Log..."></textarea></p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>Registration</h4>
+
+                    
+            <button type="button" class="btn btn-default get-token" aria-label="Left Align" data-toggle="tooltip" data-placement="right" data-original-title="Show Existing Registration Code">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Get Token
+            </button>
+            
+
+             
+             <button type="button" class="btn btn-default new-token" aria-label="Left Align" data-toggle="tooltip" data-placement="left" data-original-title="Get New Registration Code">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Token
+            </button>
+             
+
+          <h4>Print</h4>
+          <button type="button" class="btn btn-default resume-print" aria-label="Left Align" data-toggle="tooltip" data-placement="right" data-original-title="Resume Print Job">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Resume
+            </button>
+
+             <button type="button" class="btn btn-default pause-print" aria-label="Left Align" data-toggle="tooltip" data-placement="left" data-original-title="Pause Print Job">
+            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span> Pause
+            </button>
+
+            <button type="button" class="btn btn-default cancel-print" aria-label="Left Align" data-toggle="tooltip" data-placement="left" data-original-title="Cancel Print Job">
+            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Cancel
+            </button>
+
+          
+        </div>
+
+        <div class="col-lg-6">
+          <h4>Health Check</h4>
+
+          <button type="button" class="btn btn-default printer-online" aria-label="Left Align" data-toggle="tooltip" data-placement="right" data-original-title="Resume Health Check Ping">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Online
+            </button>
+            
+
+             
+             <button type="button" class="btn btn-default printer-offline" aria-label="Left Align" data-toggle="tooltip" data-placement="left" data-original-title="Stop Health Check Ping">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Offline
+            </button>
+
+          <h4>Local Print Job</h4>
+          <button type="button" class="btn btn-default local-print" aria-label="Left Align" data-toggle="tooltip" data-placement="right" data-original-title="Start a local print job">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Local Print
+            </button>
+
+          
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; Autodesk, Inc 2014</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+  
+  </body>
+</html>

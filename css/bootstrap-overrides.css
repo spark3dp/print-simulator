@@ -1,0 +1,15 @@
+
+@font-face {
+    font-family:"digital";
+    src: url("../fonts/digital.ttf") /* TTF file for CSS3 browsers */
+}
+
+.lcd{
+font-family:'digital', sans-serif;
+background-color:black;
+color:lime;
+font-size: 30px;
+padding: 0px;
+width:60%;
+letter-spacing: 20px;
+}
