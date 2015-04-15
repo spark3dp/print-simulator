@@ -15,11 +15,16 @@ var Printer= (function() {
    //var BASE_URL="https://api-alpha.spark.autodesk.com/api/v1";
    //var FAYE_URL="https://api-alpha.spark.autodesk.com/faye";
 
-    var BASE_URL="http://alpha.spark.autodesk.com/api/v1";
-    var FAYE_URL="http://alpha.spark.autodesk.com/faye";
+    var BASE_URL="http://printer-sandbox.spark.autodesk.com//api/v1";
+    var FAYE_URL="http://printer-sandbox.spark.autodesk.com/faye";
     
     var BASE_URL_LOCAL="http://localhost:8080/api/v1";
     var FAYE_URL_LOCAL="http://localhost:8080/faye"
+
+    
+
+    var BASE_URL_ALPHA="http://alpha.spark.autodesk.com/api/v1";
+    var FAYE_URL_ALPHA="http://alpha.spark.autodesk.com/faye";
 
     var STATUS_READY="ready";
     var STATUS_PRINTING="printing";
@@ -54,6 +59,11 @@ var Printer= (function() {
             log("Setting url's to local mode");
             BASE_URL=BASE_URL_LOCAL;
             FAYE_URL=FAYE_URL_LOCAL;
+        }
+        else if(local!=false&&local.toUpperCase()==='ALPHA'){
+            log("Setting url's to local mode");
+            BASE_URL=BASE_URL_ALPHA;
+            FAYE_URL=FAYE_URL_ALPHA;
         }
 
         //first set up faye client 
