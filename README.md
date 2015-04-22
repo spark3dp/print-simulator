@@ -12,21 +12,20 @@ a.	LCD screen mimics a printer display.
 b.	Log shows functions performe by the printer, debug messages sent to Spark cloud services and the storage state of the printer (token, registration state etc.).  
 c.	Buttons allow you to perform registration, health check (report the printer's online/offline status) and print job control (resume, pause, cancel).
 
-##Registration
+##Registering to use the printer
 
-*	Click “New Token” to fetch a new token from server -it should look like below once you call New Token. The simulator users local storage so once token is fetched - it will be retrieved from local storage even on page refresh. 
+*	Click “New Token” to have the printer connect to the server and retrieve a registration code. The simulator stores registration codes in local storage and does not have to call the server if it already has a stored registration code.
 
-
-*	In postman call Register Token api as below.  
-
+*	Call the Printer Register API (in the Print API's Printer Registration section).  
+The following example uses the Postman REST client (https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en).
 ```
 POST /api/v1/print/printers/register HTTP/1.1
-Host: api-alpha.spark.autodesk.com
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
  
-printer_name=my+makerbot®istration_code=YKNRKT
+printer_name=my+makerbot&registration_code=YKNRKT
  
 Response:
 {
@@ -35,8 +34,7 @@ Response:
 }
 ```
 
-*	This print simulator is actively listening for registration events. So calling registration api should update the Print Simulator and you should see the below UI:
-
+*	The print simulator actively listens for registration events. calling the Printer Register API should update the print Simulator and you should see the below UI:
 
 *	 Please note that simulator stores its registration state also in its local storage so if you want to completely reset printer state - press "New Token". But please Beware - this will issue you a new printer id and all subsequent calls should go against the new printer id. 
 *	Get Token simply returns the locally stored token. This is useful in case you have refreshed the page and need to check the current token issued by the server - of course this token is also displayed in the logs on page startup. 
