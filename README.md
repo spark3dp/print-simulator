@@ -1,67 +1,16 @@
 # Printer Simulator
 ##Introduction
-Printer simulator allows applications to test print management capabilities of spark without requiring a physical printer. It also acts as a reference implementation for printer firmware implementors.
+Printer Simulator allows app developers to test the Spark print management API without requiring a physical printer. The printer simulator also acts as a reference implementation for printer firmware designers.
 
 ##Getting Started
-Printer simulator is simply an html/javascript page, it requires no client side setup except the html and associated js, css files.  
-1. Download this entire repo  
-2. The simulator runs as a straight html file –no server setup is required – simply click open the html file in chrome (I have only tested chrome but users have reported that Firefox also works).  
-3. The Simulator consists of 3 sections: 
+Printer Simulator is a simple HTML/Javascript page, it requires no client side setup except the HTML and associated JS and CSS files.  
+1. Download this entire repository.  
+2. The simulator runs as a straight HTML file – no server setup is required – simply open the HTML file in Chrome or Firefox.  
+3. The simulator has 3 sections: 
 
-a.	LCD Screen mimics a printer display  
-b.	Log shows various debug messages such as messages being sent to the spark cloud services and stored state of the printer (token, registration state etc.)  
-c.	Buttons : Allow you to perform actions in 3 areas - Registration, Health Check (printer online/offline), Print Job control (resume, pause, cancel)
-
-
-
-##Authorization
-All the api calls originating from the application require an Authorization header token. This token can be recieved by going through the login process on spark using the application key provided.  
-
-Here is an example login end point for Alpha (please replace the application key with the key provided to your specific app!):
-https://api-alpha.spark.autodesk.com/api/v1/oauth/authorize?response_type=code&client_id=<your application key>  
-
-Once the login process is complete, you should see a json as follows.  
-
-You will use the "access_token" key in the returned json and pass it in the api request headers. We would strongly recommend using a rest client such as postman so you can update the token in a single location without having to update each end point. 
- 
-```
-
-{
-    "member_id": "",
-    "access_token": "jDG4YLSTAUlI33k79KYJ2f4Q5nAZ",
-    "refresh_token": "kX4V6V1AANvYWn6uYEAfeiUEigRmstfE",
-    "content": {
-        "application_name": "4e2891b7-95e8-459c-bb75-61dc7754bd11",
-        "scope": "DELETE READ WRITE",
-        "spark_secure_session": "57FD9ECB9418BD5E5423EC48D2B1DB00A13DA72040A494AF92BF9392BDE88034",
-        "refresh_token_issued_at": "1427994689319",
-        "refresh_token_status": "approved",
-        "expires_in": "7199",
-        "spark_session_id": "234ECD2F-4845-4ABC-88A8-1397E865B2B9",
-        "client_id": "G0ysmvG5HwQrGOBqvijhc0G9Nl6l7L5K",
-        "access_token": "jDG4YLSTAUlI33k79KYJ2f4Q5nAZ",
-        "refresh_count": "0",
-        "issued_at": "1427994689319",
-        "grant_type": "authorization_code",
-        "status": "approved",
-        "api_product_list": "[sandbox_spark_readwrite]",
-        "spark_member_id": "20707258",
-        "developer.email": "spark.developer@autodesk.com",
-        "spark_first_login": "NA",
-        "organization_id": "0",
-        "token_type": "BearerToken",
-        "refresh_token": "kX4V6V1AANvYWn6uYEAfeiUEigRmstfE",
-        "spark_opt_in": "NA",
-        "refresh_token_expires_in": "0",
-        "organization_name": "spark"
-    }
-}
-
-```
- 
-**Please note** that applications and printers need to go against different end points.  
-Applications: https://api-alpha.spark.autodesk.com
-Printers: http://alpha.spark.autodesk.com
+a.	LCD screen mimics a printer display. 
+b.	Log shows functions performe by the printer, debug messages sent to Spark cloud services and the storage state of the printer (token, registration state etc.).  
+c.	Buttons allow you to perform registration, health check (report the printer's online/offline status) and print job control (resume, pause, cancel).
 
 ##Registration
 
@@ -294,5 +243,55 @@ Response:
 ##Local Jobs
 *	The simulator can start a local job - the spark platform allows the printers to register a local job. The only requirement is that each local job should have a unique id. When spark encounters an unknown job id in the printer status - it will automatically register this job and assign it to the primary owner for this printer. This job can then be manipulated like any other cloud initiated job. 
 While not required - we highly recommend using a "local_" prefix for local job ids. This will help in debugging etc. 
+
+
+##Authorization
+All the api calls originating from the application require an Authorization header token. This token can be recieved by going through the login process on spark using the application key provided.  
+
+Here is an example login end point for Alpha (please replace the application key with the key provided to your specific app!):
+https://api-alpha.spark.autodesk.com/api/v1/oauth/authorize?response_type=code&client_id=<your application key>  
+
+Once the login process is complete, you should see a json as follows.  
+
+You will use the "access_token" key in the returned json and pass it in the api request headers. We would strongly recommend using a rest client such as postman so you can update the token in a single location without having to update each end point. 
+ 
+```
+
+{
+    "member_id": "",
+    "access_token": "jDG4YLSTAUlI33k79KYJ2f4Q5nAZ",
+    "refresh_token": "kX4V6V1AANvYWn6uYEAfeiUEigRmstfE",
+    "content": {
+        "application_name": "4e2891b7-95e8-459c-bb75-61dc7754bd11",
+        "scope": "DELETE READ WRITE",
+        "spark_secure_session": "57FD9ECB9418BD5E5423EC48D2B1DB00A13DA72040A494AF92BF9392BDE88034",
+        "refresh_token_issued_at": "1427994689319",
+        "refresh_token_status": "approved",
+        "expires_in": "7199",
+        "spark_session_id": "234ECD2F-4845-4ABC-88A8-1397E865B2B9",
+        "client_id": "G0ysmvG5HwQrGOBqvijhc0G9Nl6l7L5K",
+        "access_token": "jDG4YLSTAUlI33k79KYJ2f4Q5nAZ",
+        "refresh_count": "0",
+        "issued_at": "1427994689319",
+        "grant_type": "authorization_code",
+        "status": "approved",
+        "api_product_list": "[sandbox_spark_readwrite]",
+        "spark_member_id": "20707258",
+        "developer.email": "spark.developer@autodesk.com",
+        "spark_first_login": "NA",
+        "organization_id": "0",
+        "token_type": "BearerToken",
+        "refresh_token": "kX4V6V1AANvYWn6uYEAfeiUEigRmstfE",
+        "spark_opt_in": "NA",
+        "refresh_token_expires_in": "0",
+        "organization_name": "spark"
+    }
+}
+
+```
+ 
+**Please note** that applications and printers need to go against different end points.  
+Applications: https://api-alpha.spark.autodesk.com
+Printers: http://alpha.spark.autodesk.com
 
 *	This is how a local job appears when the app retrieves printer status (pretty much similar to regular jobs)
