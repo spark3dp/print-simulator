@@ -39,11 +39,11 @@ Response:
 Received message from server:{"registration":"success","type":"primary","printer_id":58,"member_id":20711941}
 ```
 
-##Registration
+##Registration Buttons
 *	 New Token - Completely resets the printer state, issuing a new printer ID and requiring re-registration.
 *	 Get Token - Returns the locally stored token. Re-registration is not required, the printer ID remains unchanged. 
 
-##Health Check
+##Health Check Buttons
 *	Once the printer is registered, it will start sending health check messages to the server - the simulator is configured to send a message every 60 seconds. You should see the following message in the log:  
 
 ```
@@ -102,12 +102,11 @@ Response:
 
 ##Sending Print Jobs
 * Once the printer is registered, it also starts listening on the command channel for incoming commands. 
-* To send a print job to a printer - call the below api. This will return you a job id, please note this down as you will then use it to check print status. 
+* To send a print job to a printer - use the Print Job Create API. This returns a job id which you can use to check the print job's status or cancel the job. 
 
 ```
-
-POST /api/v1/print/printers/1652/jobs HTTP/1.1
-Host: api-alpha.spark.autodesk.com
+POST /api/v1/print/printers/58/jobs HTTP/1.1
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Content-Type: application/json
 Cache-Control: no-cache
@@ -116,7 +115,7 @@ Cache-Control: no-cache
  
 Response:
 {
-    "printer_id": "327",
+    "printer_id": "58",
     "job_id": "a66de680-b35f-4cb7-baf6-c845062edbdb",
     "status": "sent"
 }
