@@ -14,9 +14,8 @@ c.	Buttons allow you to perform registration, health check (report the printer's
 
 ##Registering to use the printer
 
-*	Click “New Token” to have the printer connect to the server and retrieve a registration code. The simulator stores registration codes in local storage and does not have to call the server if it already has a stored registration code.
-
-*	Call the Printer Register API (in the Print API's Printer Registration section).  
+1. Click “New Token” to have the printer connect to the server and retrieve a registration code. 
+2. Call the Printer Register API (in the Print API's Printer Registration section).  
 The following example uses the Postman REST client (https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en).
 ```
 POST /api/v1/print/printers/register HTTP/1.1
@@ -101,7 +100,7 @@ Response:
 * Offline - Stops health checks.
 
 ##Sending Print Jobs
-* Once the printer is registered, it also starts listening on the command channel for incoming commands. 
+Once the printer is registered, it starts listening on the command channel for incoming commands. 
 * To send a print job to a printer - use the Print Job Create API. This returns a job id which you can use to check the print job's status or cancel the job. 
 
 ```
@@ -116,32 +115,35 @@ Cache-Control: no-cache
 Response:
 {
     "printer_id": "58",
-    "job_id": "a66de680-b35f-4cb7-baf6-c845062edbdb",
+    "job_id": "44964c43-176e-43a5-b36c-7694054fe028",
     "status": "sent"
 }
 
 ```
  
-* Meanwhile on the print simulator side - the simulated print job is now kicked off and you should see the following messages:
+* The printer will start "printing" the job and display appropriate messages in the log:
+```
+POST data:{"printer_status":"printing","progress":0.88,"job_id":"44964c43-176e-43a5-b36c-7694054fe028","job_progress":0.88,"job_status":"printing","data":{"job_status":"printing","total_layers":50,"layer":44,"seconds_left":120,"temprature":71,"job_id":"44964c43-176e-43a5-b36c-7694054fe028"}}
+```
 
-* From the application side you can now get the status of the job with following api. This will return the current status of the job.
+* From the application side you can view the job's status with the Print Job Status API. This will return the current status of the job.
 
 ```
-GET /api/v1/print/jobs/6e0880a9-ce65-44c2-bfa6-e6ba44d947d1 HTTP/1.1
-Host: api-alpha.spark.autodesk.com
+GET /api/v1/print/jobs/44964c43-176e-43a5-b36c-7694054fe028 HTTP/1.1
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
  
 Response:
 {
-    "job_id": "6e0880a9-ce65-44c2-bfa6-e6ba44d947d1",
+    "job_id": "44964c43-176e-43a5-b36c-7694054fe028",
     "job_status": {
-        "printer_status": "paused",
-        "job_id": "6e0880a9-ce65-44c2-bfa6-e6ba44d947d1",
+        "printer_status": "printing",
+        "job_id": "44964c43-176e-43a5-b36c-7694054fe028",
         "job_progress": "0.62",
-        "job_status": "paused",
+        "job_status": "printing",
         "data": {
-            "job_status": "paused",
+            "job_status": "printing",
             "total_layers": "50",
             "layer": "31",
             "seconds_left": "380",
@@ -155,24 +157,23 @@ Response:
 }
 ```
 ##Print Commands
-14. The print simulator can be sent additional commands. Commands with job scope e.g pause/resume/cancel require job_id as a parameter. See apiary docs for details on how to call commands:
+* The print simulator can be sent additional commands, using the Command Send API. Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See Spark Documentation for more information:
 
 ```
-POST /api/v1/print/printers/1652/command HTTP/1.1
-Host: api-alpha.spark.autodesk.com
+POST /api/v1/print/printers/58/command HTTP/1.1
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
  
-command=resume&job_id=6e0880a9-ce65-44c2-bfa6-e6ba44d947d1
- 
+command=pause&job_id=44964c43-176e-43a5-b36c-7694054fe028
  
 Response:
 {
-    "task_id": "4b435ff3-d3c7-44b4-b593-ffd8db718a9f"
+    "task_id": "bf16cf49-86d9-4c7a-8aa4-90e18eb1b689"
 }
 ```
-* Commands are asynchronous so the result of a command can be checked as follows:
+* Commands are asynchronous so the result of a command is a task, can be checked as follows:
 
 ```
 GET /api/v1/print/printers/command/abba0331-b23a-4da1-8f9c-07e983adad69 HTTP/1.1
