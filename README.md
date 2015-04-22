@@ -8,8 +8,8 @@ Printer Simulator is a simple HTML/Javascript page, it requires no client side s
 2. The simulator runs as a straight HTML file – no server setup is required – simply open the HTML file in Chrome or Firefox.  
 3. The simulator has 3 sections: 
 
-a.	LCD screen mimics a printer display. 
-b.	Log shows functions performe by the printer, debug messages sent to Spark cloud services and the storage state of the printer (token, registration state etc.).  
+a.	LCD screen mimics a printer display.<br> 
+b.	Log shows functions performe by the printer, debug messages sent to Spark cloud services and the storage state of the printer (token, registration state etc.). <br> 
 c.	Buttons allow you to perform registration, health check (report the printer's online/offline status) and print job control (resume, pause, cancel).
 
 ##Registering to use the printer
@@ -30,35 +30,34 @@ printer_name=my+makerbot&registration_code=YKNRKT
 Response:
 {
     "registered": true,
-    "printer_id": 1643
+    "printer_id": 58
 }
 ```
 
-*	The print simulator actively listens for registration events. calling the Printer Register API should update the print Simulator and you should see the below UI:
+*	The print simulator actively listens for registration events. Calling the Printer Register API will cause Spark to notify the simulator that a registration has taken place and a message will appear in the log:
+```
+Received message from server:{"registration":"success","type":"primary","printer_id":58,"member_id":20711941}
+```
 
-*	 Please note that simulator stores its registration state also in its local storage so if you want to completely reset printer state - press "New Token". But please Beware - this will issue you a new printer id and all subsequent calls should go against the new printer id. 
-*	Get Token simply returns the locally stored token. This is useful in case you have refreshed the page and need to check the current token issued by the server - of course this token is also displayed in the logs on page startup. 
+##Registration
+*	 New Token - Completely resets the printer state, issuing a new printer ID and requiring re-registration.
+*	 Get Token - Returns the locally stored token. Re-registration is not required, the printer ID remains unchanged. 
 
 ##Health Check
-
-
-*	Once the printer is registered, it will start sending health check messages to the server - the simulator is configured to send a message every 60 seconds. You should see the following message in Print  
-
-
+*	Once the printer is registered, it will start sending health check messages to the server - the simulator is configured to send a message every 60 seconds. You should see the following message in the log:  
 
 ```
-Simulator logs:
 sending health check ping with auth code:WfsVvaD84sN3wQoygfNK-JqmB4pvJko5Mrl2xgUFBzM
 POST data:{"printer_status":"ready"}
 Sending POST request to: http://alpha.spark.autodesk.com/api/v1/print/printers/status
 Server response status 200
 ```
 
-* If the printer is sending health checks regularly - it will appear as online. The application can check the printer online/offline status by calling this api:
+* If the printer is sending health checks regularly - it will appear as online. The application can check the printer online/offline status by calling the Printer Status Check API:
 
 ```
-GET /api/v1/print/printers/status/1643 HTTP/1.1
-Host: api-alpha.spark.autodesk.com
+GET /api/v1/print/printers/status/58 HTTP/1.1
+Host: sandbox.spark.autodesk.com
 Content-Type: application/json
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Cache-Control: no-cache
@@ -93,14 +92,15 @@ Response:
 * You can stop the printer from sending health checks by clicking the "Offline" button. Once the last_check_in value exceeds 60 seconds, the status for GET healthcheck will automatically flip to "offline"
 
 ```
-
 {
     "status": "Offline",
     "last_check_in": 61000
 }
 ```
-* And of course you can resume health checks by clicking the "Online" button. 
-Sending Print Jobs
+* Online - Resumes health checks.
+* Offline - Stops health checks.
+
+##Sending Print Jobs
 * Once the printer is registered, it also starts listening on the command channel for incoming commands. 
 * To send a print job to a printer - call the below api. This will return you a job id, please note this down as you will then use it to check print status. 
 
