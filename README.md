@@ -211,7 +211,7 @@ Response:
 Commands are asynchronous so the result of a command is a task. To check the status of the task use the Command Status API:
 
 ```
-GET /api/v1/print/printers/58/command?command=pause&task_id=bf16cf49-86d9-4c7a-8aa4-90e18eb1b689 HTTP/1.1
+GET /api/v1/print/printers/command/bf16cf49-86d9-4c7a-8aa4-90e18eb1b689 HTTP/1.1
 Host: api-alpha.spark.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
