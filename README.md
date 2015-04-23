@@ -2,7 +2,12 @@
 ##Introduction
 Printer Simulator allows app developers to test the Spark print management API without requiring a physical printer. The printer simulator also acts as a reference implementation for printer firmware designers.
 
-##Getting Started
+##Contents
+1. Getting Started
+2. The Printer Simulator Interface
+3. Calling the Printer Simulator from an App
+
+###1. Getting Started
 Printer Simulator is a simple HTML/Javascript page, it requires no client side setup except the HTML and associated JS and CSS files.  
 1. Download this entire repository.  
 2. The simulator runs as a straight HTML file – no server setup is required – simply open the HTML file in Chrome or Firefox.  
@@ -11,6 +16,10 @@ Printer Simulator is a simple HTML/Javascript page, it requires no client side s
 a.	LCD screen mimics a printer display.<br> 
 b.	Log shows functions performe by the printer, debug messages sent to Spark cloud services and the storage state of the printer (token, registration state etc.). <br> 
 c.	Buttons allow you to perform registration, health check (report the printer's online/offline status) and print job control (resume, pause, cancel).
+
+###2. The Printer Simulator Interface
+
+###3. Calling the Printer Simulator from an App
 
 ##Registering to use the printer
 
