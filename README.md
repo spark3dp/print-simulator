@@ -21,39 +21,39 @@ c.	Buttons allow you to perform registration, health check (report the printer's
 
 ###2. The Printer Simulator Interface
 
-<h4>Registration Buttons</h4>
+<h4>a. Registration Buttons</h4>
 
-New Token - Completely resets the printer state, issuing a new printer ID and requiring members who have registered to use the printer to re-register as if it were a different printer. 
+<b>New Token</b> - Completely resets the printer state, issuing a new printer ID and requiring members who have registered to use the printer to re-register as if it were a different printer. 
 Get Token - Returns the locally stored token. Re-registration is not required, the printer ID remains unchanged.
 
-<h4>Health Check Buttons</h4>
+<h4>b. Health Check Buttons</h4>
 
-Online - The printer simulator sends regular messages to the Spark server ("Health Checks") notifying of its status. Print jobs and Commands can be sent to the printer simulator.
-Offline - The printer simulator does not communicate with the Spark server. No print jobs or commands can be sent to the printer simulator.
+<b>Online</b> - The printer simulator sends regular messages to the Spark server ("Health Checks") notifying of its status. Print jobs and Commands can be sent to the printer simulator.
+<b>Offline</b> - The printer simulator does not communicate with the Spark server. No print jobs or commands can be sent to the printer simulator.
 
-<h4>Print Buttons</h4>
+<h4>c. Print Buttons</h4>
 
-Resume - Resume printing a paused print job: Only active if the printer simulator is "printing" a print job and the Pause button was pressed. The printer simulator will send a status check message to the Spark server, saying it has resumed work.
+<b>Resume</b> - Resume printing a paused print job: Only active if the printer simulator is "printing" a print job and the Pause button was pressed. The printer simulator will send a status check message to the Spark server, saying it has resumed work.
 
-Pause - Pause printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Spark server saying that it is paused.
+<b>Pause</b> - Pause printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Spark server saying that it is paused.
 
-Cancel - Cancel printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Spark server saying that it is paused.
+<b>Cancel</b> - Cancel printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Spark server saying that it is paused.
 
-<h4>Local Print Job Buttons</h4>
+<h4>d. Local Print Job Buttons</h4>
 
-Local - Start printing a virtual print job on the print simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Spark server of the local print job and apps can send commands to the printer simulator affecting the print job.
+<b>Local</b> - Start printing a virtual print job on the print simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Spark server of the local print job and apps can send commands to the printer simulator affecting the print job.
 
 ###3. Calling the Printer Simulator from an App
 Except for Authentication API calls, all the API calls shown below are documented in the Print API section.
 
-<h4> Authentication </h4>
+<h4> a. Authentication </h4>
 All API calls originating from the application require an Authorization header with an "access-token".
 For a guide to obtaining an access-token see our tutorial on Generating an Access Token and/or the Authentication API documentation.
 
-<h4> Testing REST API Calls</h4>
+<h4> b. Testing REST API Calls</h4>
 API calls can be tested from our Print API documentation or by using a REST client such as Postman so you can update the token in a single location without having to update each end point. 
 
-<h4>Registering to use the printer simulator</h4>
+<h4>c. Registering to use the printer simulator</h4>
 Unless you register to use the printer simulator you will not be able to send any jobs or commands to it from an app.
 
 1. Click “New Token” to have the printer connect to the Spark server and retrieve a registration code. The registration token will be displayed on the Print Simulator's log. This registers you as the print simulator's "printer owner".
@@ -78,7 +78,7 @@ The print simulator actively listens for registration events. Calling the Printe
 ```
 Received message from server:{"registration":"success","type":"primary","printer_id":58,"member_id":20711941}
 ```
-<h4>Making a Health Check</h4>
+<h4>d. Making a Health Check</h4>
 Once the printer is registered, it will start sending health check messages to the server - the printer simulator is configured to send a message every 60 seconds. The following message appears in the log:  
 
 ```
@@ -132,7 +132,7 @@ You can stop the printer from sending health checks by clicking the "Offline" bu
 }
 ```
 
-<h4>Sending Print Jobs to the Printer Simulator</h4>
+<h4>e. Sending Print Jobs to the Printer Simulator</h4>
 Once the printer is registered, it actively listens for incoming commands. 
 To send a print job to the printer simulator - use the Print Job Create API. This returns a job id which you can use to check the print job's status or pause/cancel the job. 
 
@@ -188,7 +188,7 @@ Response:
     "local_job": false
 }
 ```
-<h4> Sending Commands to the Printer Simulator</h4>
+<h4> f. Sending Commands to the Printer Simulator</h4>
 Commands can be sent to the print simulator using the Command Send API. 
 Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See Spark Documentation for more information:
 
@@ -238,7 +238,7 @@ Response:
 * You should also see the command issued on the print simulator LCD display:
 
 
-<h4>Sending Commands to the Printer Simulator</h4>
+<h4>g. Sending Commands to the Printer Simulator</h4>
  
 ##Pause/Resume/Cancel Commands
 * While other commands (calibrate, firmware_upgrade, logs) etc. return dummy data – "pause", "cancel" and "resume" commands have an actual impact on the running print job.  if you call the print command api with "pause" for example and then check the running job status - you will see the following:
