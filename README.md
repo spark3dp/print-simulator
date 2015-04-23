@@ -50,7 +50,7 @@ Except for Authentication API calls, all the API calls shown below are documente
 All API calls originating from the application require an Authorization header with an "access-token".
 For a guide to obtaining an access-token see our tutorial on Generating an Access Token and/or the Authentication API documentation.
 
-<h4> Testing REST API Calls
+<h4> Testing REST API Calls</h4>
 API calls can be tested from our Print API documentation or by using a REST client such as Postman so you can update the token in a single location without having to update each end point. 
 
 <h4>Registering to use the printer simulator</h4>
@@ -272,7 +272,3 @@ Response:
 
 * In addition you will notice that the layers have stopped processing on the printer simulator.
 * Please note that you can also trigger pause, resume, cancel from the print simulator UI. They have the same impact on updating the print job status and the running job in the simulator. 
-
-##Local Jobs
-*	The simulator can start a local job - the spark platform allows the printers to register a local job. The only requirement is that each local job should have a unique id. When spark encounters an unknown job id in the printer status - it will automatically register this job and assign it to the primary owner for this printer. This job can then be manipulated like any other cloud initiated job. 
-While not required - we highly recommend using a "local_" prefix for local job ids. This will help in debugging etc. 
