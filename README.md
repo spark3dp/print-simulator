@@ -28,16 +28,20 @@ Get Token - Returns the locally stored token. Re-registration is not required, t
 
 <h4>Health Check Buttons</h4>
 
-Online - The printer simulator sends regular messages to Spark ("Health Checks") notifying of its status. Print jobs and Commands can be sent to the printer simulator.
-Offline - The printer simulator does not communicate with Spark. No print jobs or commands can be sent to the printer simulator.
+Online - The printer simulator sends regular messages to the Spark server ("Health Checks") notifying of its status. Print jobs and Commands can be sent to the printer simulator.
+Offline - The printer simulator does not communicate with the Spark server. No print jobs or commands can be sent to the printer simulator.
 
 <h4>Print Buttons</h4>
 
-Resume - Resume printing a paused print job: Only active if the printer simulator is "printing" a print job and the Pause button was pressed. The printer simulator will send a status check message to Spark, saying it has resumed work.
+Resume - Resume printing a paused print job: Only active if the printer simulator is "printing" a print job and the Pause button was pressed. The printer simulator will send a status check message to the Spark server, saying it has resumed work.
 
-Pause - Pause printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to Spark saying that it is paused.
+Pause - Pause printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Spark server saying that it is paused.
 
-Cancel - Cancel printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to Spark saying that it is paused.
+Cancel - Cancel printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Spark server saying that it is paused.
+
+<h4>Local Print Job Buttons</h4>
+
+Local - Start printing a virtual print job on the print simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Spark server of the local print job and apps can send commands to the printer simulator affecting the print job.
 
 ###3. Calling the Printer Simulator from an App
 Except for Authentication API calls, all the API calls shown below are documented in the Print API section.
@@ -47,13 +51,14 @@ All API calls originating from the application require an Authorization header w
 For a guide to obtaining an access-token see our tutorial on Generating an Access Token and/or the Authentication API documentation.
 
 <h4> Testing REST API Calls
-API calls can be tested from our Print API documentation of by using a rest client such as Postman so you can update the token in a single location without having to update each end point. 
+API calls can be tested from our Print API documentation or by using a REST client such as Postman so you can update the token in a single location without having to update each end point. 
 
-<h4>Registering to use the printer</h4>
+<h4>Registering to use the printer simulator</h4>
+Unless you register to use the printer simulator you will not be able to send any jobs or commands to it from an app.
 
-1. Click “New Token” to have the printer connect to the server and retrieve a registration code. 
-2. Call the Printer Register API (in the Print API's Printer Registration section).  
-The following example uses the Postman REST client (https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en).
+1. Click “New Token” to have the printer connect to the Spark server and retrieve a registration code. The registration token will be displayed on the Print Simulator's log. This registers you as the print simulator's "printer owner".
+2. Call the Printer Register API (see the Print API's Printer Registration section).  
+The following example uses the Postman REST client (https://chrome.google.com/webstore/detail/postman-rest-client).
 ```
 POST /api/v1/print/printers/register HTTP/1.1
 Host: sandbox.spark.autodesk.com
@@ -69,18 +74,12 @@ Response:
     "printer_id": 58
 }
 ```
-
-*	The print simulator actively listens for registration events. Calling the Printer Register API will cause Spark to notify the simulator that a registration has taken place and a message will appear in the log:
+The print simulator actively listens for registration events. Calling the Printer Register API will cause the Spark server to notify the print simulator that a registration has taken place and a message will appear in the log:
 ```
 Received message from server:{"registration":"success","type":"primary","printer_id":58,"member_id":20711941}
 ```
-
-##Registration Buttons
-*	 New Token - Completely resets the printer state, issuing a new printer ID and requiring re-registration.
-*	 Get Token - Returns the locally stored token. Re-registration is not required, the printer ID remains unchanged. 
-
-##Health Check Buttons
-*	Once the printer is registered, it will start sending health check messages to the server - the simulator is configured to send a message every 60 seconds. You should see the following message in the log:  
+<h4>Making a Health Check</h4>
+Once the printer is registered, it will start sending health check messages to the server - the printer simulator is configured to send a message every 60 seconds. The following message appears in the log:  
 
 ```
 sending health check ping with auth code:WfsVvaD84sN3wQoygfNK-JqmB4pvJko5Mrl2xgUFBzM
@@ -88,8 +87,7 @@ POST data:{"printer_status":"ready"}
 Sending POST request to: http://alpha.spark.autodesk.com/api/v1/print/printers/status
 Server response status 200
 ```
-
-* If the printer is sending health checks regularly - it will appear as online. The application can check the printer online/offline status by calling the Printer Status Check API:
+If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API:
 
 ```
 GET /api/v1/print/printers/status/58 HTTP/1.1
@@ -125,7 +123,7 @@ Response:
             
 ```
 
-* You can stop the printer from sending health checks by clicking the "Offline" button. Once the last_check_in value exceeds 60 seconds, the status for GET healthcheck will automatically flip to "offline"
+You can stop the printer from sending health checks by clicking the "Offline" button. Once the last_check_in value exceeds 60 seconds, the status for GET healthcheck will automatically flip to "offline"
 
 ```
 {
@@ -133,12 +131,10 @@ Response:
     "last_check_in": 61000
 }
 ```
-* Online - Resumes health checks.
-* Offline - Stops health checks.
 
-##Sending Print Jobs
-Once the printer is registered, it starts listening on the command channel for incoming commands. 
-* To send a print job to a printer - use the Print Job Create API. This returns a job id which you can use to check the print job's status or cancel the job. 
+<h4>Sending Print Jobs to the Printer Simulator</h4>
+Once the printer is registered, it actively listens for incoming commands. 
+To send a print job to the printer simulator - use the Print Job Create API. This returns a job id which you can use to check the print job's status or pause/cancel the job. 
 
 ```
 POST /api/v1/print/printers/58/jobs HTTP/1.1
@@ -157,13 +153,12 @@ Response:
 }
 
 ```
- 
-* The printer will start "printing" the job and display appropriate messages in the log:
+The printer will start "printing" the job and display appropriate messages in the log:
 ```
 POST data:{"printer_status":"printing","progress":0.88,"job_id":"44964c43-176e-43a5-b36c-7694054fe028","job_progress":0.88,"job_status":"printing","data":{"job_status":"printing","total_layers":50,"layer":44,"seconds_left":120,"temprature":71,"job_id":"44964c43-176e-43a5-b36c-7694054fe028"}}
 ```
 
-* From the application side you can view the job's status with the Print Job Status API. This will return the current status of the job.
+Your app can view the job's status with the Print Job Status API. This will return the current status of the job.
 
 ```
 GET /api/v1/print/jobs/44964c43-176e-43a5-b36c-7694054fe028 HTTP/1.1
@@ -184,7 +179,7 @@ Response:
             "total_layers": "50",
             "layer": "31",
             "seconds_left": "380",
-            "temprature": "71",
+            "temperature": "71",
             "job_id": "6e0880a9-ce65-44c2-bfa6-e6ba44d947d1"
         }
     },
@@ -193,7 +188,7 @@ Response:
     "local_job": false
 }
 ```
-<h4> Sending Print Jobs to the Printer Simulator</h4>
+<h4> Sending Commands to the Printer Simulator</h4>
 * The print simulator can be sent additional commands, using the Command Send API. Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See Spark Documentation for more information:
 
 ```
