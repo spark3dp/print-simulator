@@ -189,8 +189,10 @@ Response:
 }
 ```
 <h4> f. Sending commands to the printer simulator</h4>
-Commands can be sent to the print simulator using the Command Send API. 
-Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See Spark Documentation for more information:
+Commands can be sent to the printer simulator using the Command Send API. 
+While general printer commands such as calibrate, firmware_upgrade and logs, return dummy data, "pause", "cancel" and "resume" commands have an actual impact on the (virtually) running print job.  
+
+Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See the Spark Print API's Printer Management documentation for more information:
 
 ```
 POST /api/v1/print/printers/58/command HTTP/1.1
@@ -234,41 +236,6 @@ Response:
     "command": "resume"
 }
 ```
+In addition you will notice that the layers have stopped processing on the printer simulator.
+Please note that you can also trigger pause, resume, cancel from the print simulator UI. They have the same impact on updating the print job status and the running job in the simulator. 
 
-* You should also see the command issued on the print simulator LCD display:
-
-
-<h4>g. Sending commands to the printer simulator</h4>
- 
-##Pause/Resume/Cancel Commands
-* While other commands (calibrate, firmware_upgrade, logs) etc. return dummy data – "pause", "cancel" and "resume" commands have an actual impact on the running print job.  if you call the print command api with "pause" for example and then check the running job status - you will see the following:
-
-```
-
-{
-  "printer_status": "printing",
-  "progress": 0.5,
-  "error_code": 404,
-  "error_message": "unknown command",
-  "job_id": "121333sdsd",
-  "job_status": "paused",
-  "job_progress": 0.5,
-  "data": {
-    "state": "printing",
-    "change": " ",
-    "ui_sub_state": "",
-    "is_error": false,
-    "error_code": 123,
-    "error": 123,
-    "error_message": "lorem ipsum",
-    "layer": 14,
-    "total_layers": 23,
-    "seconds_left": 3643,
-    "temperature": 71,
-    "job_id": 123
-  }
-}
-```
-
-* In addition you will notice that the layers have stopped processing on the printer simulator.
-* Please note that you can also trigger pause, resume, cancel from the print simulator UI. They have the same impact on updating the print job status and the running job in the simulator. 
