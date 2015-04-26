@@ -89,7 +89,7 @@ POST data:{"printer_status":"ready"}
 Sending POST request to: http://alpha.spark.autodesk.com/api/v1/print/printers/status
 Server response status 200
 ```
-If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API:
+If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API (see the Print API's <a href="https://spark.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-management" target="_blank">Printer Management section</a>):
 
 ```
 GET /api/v1/print/printers/status/58 HTTP/1.1
@@ -194,7 +194,7 @@ Response:
 Commands can be sent to the printer simulator using the Command Send API. 
 While general printer commands such as calibrate, firmware_upgrade and logs, return dummy data, "pause", "cancel" and "resume" commands have an actual impact on the (virtually) running print job.  
 
-Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See the Spark Print API's Printer Management documentation for more information:
+Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See the Spark Print API's <a href="https://spark.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-management" target="_blank">Printer Management section</a>) for more information:
 
 ```
 POST /api/v1/print/printers/58/command HTTP/1.1
