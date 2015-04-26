@@ -80,7 +80,7 @@ The print simulator actively listens for registration events. Calling the Printe
 ```
 Received message from server:{"registration":"success","type":"primary","printer_id":58,"member_id":20711941}
 ```
-<h4>d. Making a Health Check</h4>
+<h4>d. Making a health check</h4>
 Once the printer is registered, it will start sending health check messages to the server - the printer simulator is configured to send a message every 60 seconds. The following message appears in the log:  
 
 ```
