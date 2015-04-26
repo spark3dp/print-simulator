@@ -17,7 +17,7 @@ Printer Simulator is a simple HTML/Javascript page, it requires no client side s
 
 a.	The <b>LCD screen</b> mimics a printer display.<br> 
 b.	The <b>Log</b> reports printer activity, debug messages sent to Spark cloud services and the storage state of the printer (token, registration state etc.). <br> 
-c.	Buttons allow you to perform registration, health check (report the printer's online/offline status) and print job control (resume, pause, cancel).
+c.	<b>Buttons</b> allow you to perform registration, health check (report the printer's online/offline status) and print job control (resume, pause, cancel).
 
 ###2. The Printer Simulator Interface
 
