@@ -60,7 +60,7 @@ Unless you register to use the printer simulator you will not be able to send an
 
 1. Click “New Token” to have the printer connect to the Spark server and retrieve a registration code. The registration token will be displayed on the Print Simulator's log. This registers you as the print simulator's "printer owner".
 2. Call the Printer Register API (see the Print API's <a href="https://spark.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-registration" target="_blank">Printer Registration section</a>).  
-The following example uses the Postman REST client (https://chrome.google.com/webstore/detail/postman-rest-client).
+The following example uses the <a href="https://www.getpostman.com/" target="_blank">Postman REST client</a>.
 ```
 POST /api/v1/print/printers/register HTTP/1.1
 Host: sandbox.spark.autodesk.com
