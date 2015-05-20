@@ -61,7 +61,7 @@ var Printer= (function() {
             FAYE_URL=FAYE_URL_LOCAL;
         }
         else if(local!=false&&local.toUpperCase()==='ALPHA'){
-            log("Setting url's to local mode");
+            log("Setting url's to alpha mode");
             BASE_URL=BASE_URL_ALPHA;
             FAYE_URL=FAYE_URL_ALPHA;
         }
