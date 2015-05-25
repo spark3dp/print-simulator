@@ -342,6 +342,7 @@ var Printer= (function() {
            
             if(cancel()==true){
                 acg.data =JSON.stringify({"job_id":currentPrintCommand.task_id,"job_status":STATUS_CANCELED});
+                clearPrintJob();
             }
             else{
                 acg.error_code=400;
@@ -513,7 +514,6 @@ var Printer= (function() {
             currentPrinterStatus=STATUS_READY;
             currentJobStatus=STATUS_CANCELED;
             healthCheck();//send a status udpate 
-            clearPrintJob();
             return true;
         }
 
