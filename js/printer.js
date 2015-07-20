@@ -1,9 +1,9 @@
 var Printer= (function() {
  
     // Private variables and functions
-    var env = "alpha";
-    var TOKEN_KEY = "com.autodesk.print.token"+env;
-    var REGISTRATION_STATE="com.autodesk.print.registered"+env;
+    var env = "sandbox";
+    var TOKEN_KEY_BASE = "com.autodesk.print.token."
+    var TOKEN_KEY = TOKEN_KEY_BASE+env;
     var isOnline=false;
     var healthCheckTimer;
     //how often to send health check ping
@@ -20,8 +20,6 @@ var Printer= (function() {
     
     var BASE_URL_LOCAL="http://localhost:8080/api/v1";
     var FAYE_URL_LOCAL="http://localhost:8080/faye"
-
-    
 
     var BASE_URL_ALPHA="http://alpha.spark.autodesk.com/api/v1";
     var FAYE_URL_ALPHA="http://alpha.spark.autodesk.com/faye";
@@ -51,7 +49,6 @@ var Printer= (function() {
     */
     var init= function(){
         
-
         log("initializing printer...");
         //set up url if local mode
         var local=getQueryVariable('mode');
@@ -59,11 +56,15 @@ var Printer= (function() {
             log("Setting url's to local mode");
             BASE_URL=BASE_URL_LOCAL;
             FAYE_URL=FAYE_URL_LOCAL;
+            env="local";
+            TOKEN_KEY = TOKEN_KEY_BASE+env;
         }
         else if(local!=false&&local.toUpperCase()==='ALPHA'){
-            log("Setting url's to local mode");
+            log("Setting url's to alpha mode");
             BASE_URL=BASE_URL_ALPHA;
             FAYE_URL=FAYE_URL_ALPHA;
+            env="alpha";
+            TOKEN_KEY = TOKEN_KEY_BASE+env;
         }
 
         //first set up faye client 
@@ -81,8 +82,6 @@ var Printer= (function() {
         }
         };
         client.addExtension(Logger);
-
-
 
         log("checking token in local storage...");
         var token=getToken();
@@ -109,8 +108,6 @@ var Printer= (function() {
                 online();
             }
         }   
-        
-
     }
 
     /**
@@ -179,11 +176,11 @@ var Printer= (function() {
         
     };
  
-     //put the REGISTRAIOTN STATE into storage
+     //put the REGISTRATION STATE into storage
      var putRegistrationState = function(isRegistered) {
         var token=getToken();
         if(token==null) {
-            log("putRegistrationState:No token found in storage!");
+            log("putRegistrationState: No token found in storage!");
         }
         else{
             token.registered=isRegistered;
