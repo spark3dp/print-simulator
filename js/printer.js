@@ -21,8 +21,8 @@ var Printer= (function() {
     var BASE_URL_LOCAL="http://localhost:8080/api/v1";
     var FAYE_URL_LOCAL="http://localhost:8080/faye"
 
-    var BASE_URL_ALPHA="http://alpha.spark.autodesk.com/api/v1";
-    var FAYE_URL_ALPHA="http://alpha.spark.autodesk.com/faye";
+    var BASE_URL_ALPHA="http://printer-alpha.spark.autodesk.com/api/v1";
+    var FAYE_URL_ALPHA="http://printer-alpha.spark.autodesk.com/faye";
 
     var STATUS_READY="ready";
     var STATUS_PRINTING="printing";
