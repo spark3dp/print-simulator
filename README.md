@@ -4,6 +4,9 @@ The Printer Simulator allows app developers to test the Spark <a href="https://s
 It provides all the same functionality as a "regular" 3D printer, however its 3D printing is virtual.
 The printer simulator also acts as a reference implementation for printer firmware designers.
 
+<b>To see the Spark API documentation and make meaningful use of the Print Simulator, please request access to the developers' portal at
+ <a href="https://spark.autodesk.com/developers/" target="_blank">https://spark.autodesk.com/developers/</a>.</b>
+
 ##Contents
 1. Getting Started
 2. The Printer Simulator Interface
