@@ -380,7 +380,6 @@ var Printer= (function() {
         var message=currentPrintCommand;
         lcdWrite("LAYER:"+currentLayer +" OF: "+totalLayers);
 
-        
         if(currentLayer<totalLayers){
             currentPrinterStatus=STATUS_PRINTING;
             currentJobStatus=STATUS_PRINTING;
@@ -389,22 +388,16 @@ var Printer= (function() {
         else{
             currentPrinterStatus=STATUS_READY;
             currentJobStatus=STATUS_COMPLETED;
-            healthCheck();
             setPrintJobStatus(currentPrinterStatus,currentJobStatus, currentPrintCommand.task_id,null);
         }
-        
-        
         
         if(currentLayer<totalLayers){
             printCommandTimer=setTimeout(processPrintCommand,PRINT_JOB_INTERVAL);
             currentLayer=currentLayer+1;
         }
-
         else{//reset everything
             clearPrintJob();
-
         }
-
     }
 
 
