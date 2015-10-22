@@ -395,8 +395,9 @@ var Printer= (function() {
             printCommandTimer=setTimeout(processPrintCommand,PRINT_JOB_INTERVAL);
             currentLayer=currentLayer+1;
         }
-        else{//reset everything
+        else{ //reset everything and send the status update.
             clearPrintJob();
+            healthCheck();  //send a status udpate 
         }
     }
 
