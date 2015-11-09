@@ -377,6 +377,14 @@ var Printer= (function() {
     */
     var processPrintCommand=function(){
         
+         // If the job has been cancel, cancel this print command,
+        // reset everything and send the status update.
+        if (currentJobStatus === STATUS_CANCELED) {
+            clearPrintJob();
+            healthCheck();
+            return;
+        }
+        
         var message=currentPrintCommand;
         lcdWrite("LAYER:"+currentLayer +" OF: "+totalLayers);
 
@@ -397,7 +405,7 @@ var Printer= (function() {
         }
         else{ //reset everything and send the status update.
             clearPrintJob();
-            healthCheck();  //send a status udpate 
+            healthCheck();  //send a status update 
         }
     }
 
