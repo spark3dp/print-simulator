@@ -53,7 +53,7 @@ Except for Authentication API calls, all the API calls shown below are documente
 
 <h4> a. Authentication </h4>
 All API calls originating from the application require an Authorization header with an "access-token".
-For a guide to obtaining an access-token see our tutorial on <a href="https://spark.autodesk.com/developers/reference/introduction/tutorials/access-token" target="_blank">Generating an Access Token</a> and/or the <a href="https://spark.autodesk.com/developers/reference/authentication" target="_blank">Authentication API</a> documentation.
+For a guide to obtaining an access-token see our tutorial on <a href="https://spark.autodesk.com/developers/reference/software-developers/tutorials/access-token" target="_blank">Generating an Access Token</a> and/or the <a href="https://spark.autodesk.com/developers/reference/authentication" target="_blank">Authentication API</a> documentation.
 
 <h4> b. Testing REST API calls</h4>
 API calls can be tested from our Print API documentation or by using a REST client such as Postman so you can update the token in a single location without having to update each end point. 
