@@ -49,7 +49,7 @@ c.	<b>Buttons</b> allow you to perform registration, health check (report the pr
 <b>Local</b> - Start printing a virtual print job on the print simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Spark server of the local print job and apps can send commands to the printer simulator affecting the print job.
 
 ###3. Calling the Printer Simulator from an App
-Except for Authentication API calls, all the API calls shown below are documented in the Spark <a href="https://spark.autodesk.com/developers/reference/print" target="_blank">Print API</a>section.
+Except for Authentication API calls, all the API calls shown below are documented in the Spark <a href="https://spark.autodesk.com/developers/reference/print" target="_blank">Print API</a> section.
 
 <h4> a. Authentication </h4>
 All API calls originating from the application require an Authorization header with an "access-token".
