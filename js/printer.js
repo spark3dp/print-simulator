@@ -24,6 +24,9 @@ var Printer= (function() {
     var BASE_URL_ALPHA="http://printer-alpha.spark.autodesk.com/api/v1";
     var FAYE_URL_ALPHA="http://printer-alpha.spark.autodesk.com/faye";
 
+    var BASE_URL_FORGE_ALPHA="http://printer-forge-dev.spark.autodesk.com/v1";
+    var FAYE_URL_FORGE_ALPHA="http://printer-forge-dev.spark.autodesk.com/faye";
+
     var STATUS_READY="ready";
     var STATUS_PRINTING="printing";
     var STATUS_PAUSED="paused";
@@ -63,6 +66,13 @@ var Printer= (function() {
             log("Setting url's to alpha mode");
             BASE_URL=BASE_URL_ALPHA;
             FAYE_URL=FAYE_URL_ALPHA;
+            env="alpha";
+            TOKEN_KEY = TOKEN_KEY_BASE+env;
+        }
+        else if(local!=false&&local.toUpperCase()==='FORGE_ALPHA'){
+            log("Setting url's to alpha mode");
+            BASE_URL=BASE_URL_FORGE_ALPHA;
+            FAYE_URL=FAYE_URL_FORGE_ALPHA;
             env="alpha";
             TOKEN_KEY = TOKEN_KEY_BASE+env;
         }
