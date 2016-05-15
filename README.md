@@ -66,7 +66,7 @@ Unless you register to use the printer simulator you will not be able to send an
 The following example uses the <a href="https://www.getpostman.com/" target="_blank">Postman REST client</a>.
 ```
 POST /api/v1/print/printers/register HTTP/1.1
-Host: developer.api.autodesk.com
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
@@ -89,14 +89,14 @@ Once the printer is registered, it will start sending health check messages to t
 ```
 sending health check ping with auth code:WfsVvaD84sN3wQoygfNK-JqmB4pvJko5Mrl2xgUFBzM
 POST data:{"printer_status":"ready"}
-Sending POST request to: http://developer.api.autodesk.com/api/v1/print/printers/status
+Sending POST request to: http://alpha.spark.autodesk.com/api/v1/print/printers/status
 Server response status 200
 ```
 If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API (see the Print API's <a href="https://spark.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-management" target="_blank">Printer Management section</a>):
 
 ```
 GET /api/v1/print/printers/status/58 HTTP/1.1
-Host: developer.api.autodesk.com
+Host: sandbox.spark.autodesk.com
 Content-Type: application/json
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Cache-Control: no-cache
@@ -143,7 +143,7 @@ To send a print job to the printer simulator - use the Print Job Create API. Thi
 
 ```
 POST /api/v1/print/printers/58/jobs HTTP/1.1
-Host: developer.api.autodesk.com
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Content-Type: application/json
 Cache-Control: no-cache
@@ -167,7 +167,7 @@ Your app can view the job's status with the Print Job Status API. This will retu
 
 ```
 GET /api/v1/print/jobs/44964c43-176e-43a5-b36c-7694054fe028 HTTP/1.1
-Host: developer.api.autodesk.com
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
  
@@ -201,7 +201,7 @@ Commands with a job scope (pause/resume/cancel) require a job_id as a parameter.
 
 ```
 POST /api/v1/print/printers/58/command HTTP/1.1
-Host: developer.api.autodesk.com
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
@@ -217,7 +217,7 @@ Commands are asynchronous so the result of a command is a task. To check the sta
 
 ```
 GET /api/v1/print/printers/command/bf16cf49-86d9-4c7a-8aa4-90e18eb1b689 HTTP/1.1
-Host: developer.api.autodesk.com
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
