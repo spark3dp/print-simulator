@@ -30,6 +30,10 @@ var Printer= (function() {
     var BASE_URL_FORGE_BETA="http://printer-forge-stage.spark.autodesk.com/v1";
     var FAYE_URL_FORGE_BETA="http://printer-forge-stage.spark.autodesk.com/faye";
 
+    var BASE_URL_FORGE="http://printer-forge-prod.spark.autodesk.com/v1";
+    var FAYE_URL_FORGE="http://printer-forge-prod.spark.autodesk.com/faye";
+
+
     var STATUS_READY="ready";
     var STATUS_PRINTING="printing";
     var STATUS_PAUSED="paused";
@@ -83,6 +87,13 @@ var Printer= (function() {
             log("Setting url's to forge BETA mode");
             BASE_URL=BASE_URL_FORGE_BETA;
             FAYE_URL=FAYE_URL_FORGE_BETA;
+            env="beta";
+            TOKEN_KEY = TOKEN_KEY_BASE+env;
+        }
+        else if(local!=false&&local.toUpperCase()==='FORGE'){
+            log("Setting url's to forge BETA mode");
+            BASE_URL=BASE_URL_FORGE;
+            FAYE_URL=FAYE_URL_FORGE;
             env="beta";
             TOKEN_KEY = TOKEN_KEY_BASE+env;
         }
