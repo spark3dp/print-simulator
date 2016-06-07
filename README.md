@@ -4,7 +4,7 @@ The Printer Simulator allows app developers to test the Spark <a href="https://s
 It provides all the same functionality as a "regular" 3D printer, however its 3D printing is virtual.
 The printer simulator also acts as a reference implementation for printer firmware designers.
 
-<b>To see the Spark API documentation and make meaningful use of the Print Simulator, please request access to the developers' portal at
+<b>To see the Spark API documentation and make meaningful use of the Print Simulator, please sign up to the developers' portal at
  <a href="https://spark.autodesk.com/developers/" target="_blank">https://spark.autodesk.com/developers/</a>.</b>
 
 ##Contents
@@ -49,11 +49,11 @@ c.	<b>Buttons</b> allow you to perform registration, health check (report the pr
 <b>Local</b> - Start printing a virtual print job on the print simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Spark server of the local print job and apps can send commands to the printer simulator affecting the print job.
 
 ###3. Calling the Printer Simulator from an App
-Except for Authentication API calls, all the API calls shown below are documented in the Spark <a href="https://spark.autodesk.com/developers/reference/print" target="_blank">Print API</a>section.
+Except for Authentication API calls, all the API calls shown below are documented in the Spark <a href="https://spark.autodesk.com/developers/reference/print" target="_blank">Print API</a> section.
 
 <h4> a. Authentication </h4>
 All API calls originating from the application require an Authorization header with an "access-token".
-For a guide to obtaining an access-token see our tutorial on <a href="https://spark.autodesk.com/developers/reference/introduction/tutorials/access-token" target="_blank">Generating an Access Token</a> and/or the <a href="https://spark.autodesk.com/developers/reference/authentication" target="_blank">Authentication API</a> documentation.
+For a guide to obtaining an access-token see our tutorial on <a href="https://spark.autodesk.com/developers/reference/software-developers/tutorials/access-token" target="_blank">Generating an Access Token</a> and/or the <a href="https://spark.autodesk.com/developers/reference/authentication" target="_blank">Authentication API</a> documentation.
 
 <h4> b. Testing REST API calls</h4>
 API calls can be tested from our Print API documentation or by using a REST client such as Postman so you can update the token in a single location without having to update each end point. 
@@ -217,7 +217,7 @@ Commands are asynchronous so the result of a command is a task. To check the sta
 
 ```
 GET /api/v1/print/printers/command/bf16cf49-86d9-4c7a-8aa4-90e18eb1b689 HTTP/1.1
-Host: api-alpha.spark.autodesk.com
+Host: sandbox.spark.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
