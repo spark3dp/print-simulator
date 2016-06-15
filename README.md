@@ -53,7 +53,7 @@ Except for Authentication API calls, all the API calls shown below are documente
 
 <h4> a. Authentication </h4>
 All API calls originating from the application require an Authorization header with an "access-token".
-For a guide to obtaining an access-token see our tutorial on <a href="https://developer.autodesk.com/getToken" target="_blank">Generating an Access Token</a> and/or the <a href="https://developer.autodesk.com/authentication" target="_blank">Authentication API</a> documentation.
+For a guide to obtaining an access-token see our tutorial on <a href="https://developer.autodesk.com" target="_blank">Generating an Access Token</a> and/or the <a href="https://developer.autodesk.com" target="_blank">Authentication API</a> documentation.
 
 <h4> b. Testing REST API calls</h4>
 API calls can be tested from our Print API documentation or by using a REST client such as Postman so you can update the token in a single location without having to update each end point. 
@@ -62,7 +62,7 @@ API calls can be tested from our Print API documentation or by using a REST clie
 Unless you register to use the printer simulator you will not be able to send any jobs or commands to it from an app.
 
 1. Click “New Token” to have the printer connect to the Forge server and retrieve a registration code. The registration token will be displayed on the Print Simulator's log. This registers you as the print simulator's "printer owner".
-2. Call the Printer Register API (see the Print API's <a href="https://developer.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-registration" target="_blank">Printer Registration section</a>).  
+2. Call the Printer Register API (see the Print API's <a href="https://developer.autodesk.com" target="_blank">Printer Registration section</a>).  
 The following example uses the <a href="https://www.getpostman.com/" target="_blank">Postman REST client</a>.
 ```
 POST /api/v1/print/printers/register HTTP/1.1
@@ -92,7 +92,7 @@ POST data:{"printer_status":"ready"}
 Sending POST request to: http://developer.api.autodesk.com/api/v1/print/printers/status
 Server response status 200
 ```
-If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API (see the Print API's <a href="https://developer.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-management" target="_blank">Printer Management section</a>):
+If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API (see the Print API's <a href="https://developer.autodesk.com" target="_blank">Printer Management section</a>):
 
 ```
 GET /api/v1/print/printers/status/58 HTTP/1.1
@@ -197,7 +197,7 @@ Response:
 Commands can be sent to the printer simulator using the Command Send API. 
 While general printer commands such as calibrate, firmware_upgrade and logs, return dummy data, "pause", "cancel" and "resume" commands have an actual impact on the (virtually) running print job.  
 
-Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See the Forge Print API's <a href="https://developer.api.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-management" target="_blank">Printer Management section</a>) for more information:
+Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See the Forge Print API's <a href="https://developer.api.autodesk.com" target="_blank">Printer Management section</a>) for more information:
 
 ```
 POST /api/v1/print/printers/58/command HTTP/1.1
