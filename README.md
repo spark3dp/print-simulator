@@ -1,11 +1,11 @@
 # Printer Simulator
 ##Introduction
-The Printer Simulator allows app developers to test the Spark <a href="https://spark.autodesk.com/developers/reference/print" target="_blank">Print API</a> without requiring a physical printer.
+The Printer Simulator allows app developers to test the Forge <a href="https://developer.autodesk.com" target="_blank">Print API</a> without requiring a physical printer.
 It provides all the same functionality as a "regular" 3D printer, however its 3D printing is virtual.
 The printer simulator also acts as a reference implementation for printer firmware designers.
 
-<b>To see the Spark API documentation and make meaningful use of the Print Simulator, please sign up to the developers' portal at
- <a href="https://spark.autodesk.com/developers/" target="_blank">https://spark.autodesk.com/developers/</a>.</b>
+<b>To see the Forge API documentation and make meaningful use of the Print Simulator, please sign up to the developers' portal at
+ <a href="https://developer.autodesk.com" target="_blank">https://developer.autodesk.com</a>.</b>
 
 ##Contents
 1. Getting Started
@@ -19,7 +19,7 @@ Printer Simulator is a simple HTML/Javascript page, it requires no client side s
 3. The simulator has 3 sections: 
 
 a.	The <b>LCD screen</b> mimics a printer display.<br> 
-b.	The <b>Log</b> reports printer activity, debug messages sent to Spark cloud services and the storage state of the printer (token, registration state etc.). <br> 
+b.	The <b>Log</b> reports printer activity, debug messages sent to Forge cloud services and the storage state of the printer (token, registration state etc.). <br> 
 c.	<b>Buttons</b> allow you to perform registration, health check (report the printer's online/offline status) and print job control (resume, pause, cancel).
 
 ###2. The Printer Simulator Interface
@@ -32,28 +32,28 @@ c.	<b>Buttons</b> allow you to perform registration, health check (report the pr
 
 <h4>b. Health Check buttons</h4>
 
-<b>Online</b> - The printer simulator sends regular messages to the Spark server ("Health Checks") notifying of its status. Print jobs and Commands can be sent to the printer simulator.
+<b>Online</b> - The printer simulator sends regular messages to the Forge server ("Health Checks") notifying of its status. Print jobs and Commands can be sent to the printer simulator.
 
-<b>Offline</b> - The printer simulator does not communicate with the Spark server. No print jobs or commands can be sent to the printer simulator.
+<b>Offline</b> - The printer simulator does not communicate with the Forge server. No print jobs or commands can be sent to the printer simulator.
 
 <h4>c. Print buttons</h4>
 
-<b>Resume</b> - Resume printing a paused print job: Only active if the printer simulator is "printing" a print job and the Pause button was pressed. The printer simulator will send a status check message to the Spark server, saying it has resumed work.
+<b>Resume</b> - Resume printing a paused print job: Only active if the printer simulator is "printing" a print job and the Pause button was pressed. The printer simulator will send a status check message to the Forge server, saying it has resumed work.
 
-<b>Pause</b> - Pause printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Spark server saying that it is paused.
+<b>Pause</b> - Pause printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Forge server saying that it is paused.
 
-<b>Cancel</b> - Cancel printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Spark server saying that it is paused.
+<b>Cancel</b> - Cancel printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Forge server saying that it is paused.
 
 <h4>d. Local Print Job buttons</h4>
 
-<b>Local</b> - Start printing a virtual print job on the print simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Spark server of the local print job and apps can send commands to the printer simulator affecting the print job.
+<b>Local</b> - Start printing a virtual print job on the print simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Forge server of the local print job and apps can send commands to the printer simulator affecting the print job.
 
 ###3. Calling the Printer Simulator from an App
-Except for Authentication API calls, all the API calls shown below are documented in the Spark <a href="https://spark.autodesk.com/developers/reference/print" target="_blank">Print API</a> section.
+Except for Authentication API calls, all the API calls shown below are documented in the Forge <a href="https://developer.autodesk.com" target="_blank">Print API</a> section.
 
 <h4> a. Authentication </h4>
 All API calls originating from the application require an Authorization header with an "access-token".
-For a guide to obtaining an access-token see our tutorial on <a href="https://spark.autodesk.com/developers/reference/software-developers/tutorials/access-token" target="_blank">Generating an Access Token</a> and/or the <a href="https://spark.autodesk.com/developers/reference/authentication" target="_blank">Authentication API</a> documentation.
+For a guide to obtaining an access-token see our tutorial on <a href="https://developer.autodesk.com" target="_blank">Generating an Access Token</a> and/or the <a href="https://developer.autodesk.com" target="_blank">Authentication API</a> documentation.
 
 <h4> b. Testing REST API calls</h4>
 API calls can be tested from our Print API documentation or by using a REST client such as Postman so you can update the token in a single location without having to update each end point. 
@@ -61,12 +61,12 @@ API calls can be tested from our Print API documentation or by using a REST clie
 <h4>c. Registering to use the printer simulator</h4>
 Unless you register to use the printer simulator you will not be able to send any jobs or commands to it from an app.
 
-1. Click “New Token” to have the printer connect to the Spark server and retrieve a registration code. The registration token will be displayed on the Print Simulator's log. This registers you as the print simulator's "printer owner".
-2. Call the Printer Register API (see the Print API's <a href="https://spark.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-registration" target="_blank">Printer Registration section</a>).  
+1. Click “New Token” to have the printer connect to the Forge server and retrieve a registration code. The registration token will be displayed on the Print Simulator's log. This registers you as the print simulator's "printer owner".
+2. Call the Printer Register API (see the Print API's <a href="https://developer.autodesk.com" target="_blank">Printer Registration section</a>).  
 The following example uses the <a href="https://www.getpostman.com/" target="_blank">Postman REST client</a>.
 ```
 POST /api/v1/print/printers/register HTTP/1.1
-Host: sandbox.spark.autodesk.com
+Host: developer.api.autodesk.com
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
@@ -79,7 +79,7 @@ Response:
     "printer_id": 58
 }
 ```
-The print simulator actively listens for registration events. Calling the Printer Register API will cause the Spark server to notify the print simulator that a registration has taken place and a message will appear in the log:
+The print simulator actively listens for registration events. Calling the Printer Register API will cause the Forge server to notify the print simulator that a registration has taken place and a message will appear in the log:
 ```
 Received message from server:{"registration":"success","type":"primary","printer_id":58,"member_id":20711941}
 ```
@@ -89,14 +89,14 @@ Once the printer is registered, it will start sending health check messages to t
 ```
 sending health check ping with auth code:WfsVvaD84sN3wQoygfNK-JqmB4pvJko5Mrl2xgUFBzM
 POST data:{"printer_status":"ready"}
-Sending POST request to: http://alpha.spark.autodesk.com/api/v1/print/printers/status
+Sending POST request to: http://developer.api.autodesk.com/api/v1/print/printers/status
 Server response status 200
 ```
-If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API (see the Print API's <a href="https://spark.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-management" target="_blank">Printer Management section</a>):
+If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API (see the Print API's <a href="https://developer.autodesk.com" target="_blank">Printer Management section</a>):
 
 ```
 GET /api/v1/print/printers/status/58 HTTP/1.1
-Host: sandbox.spark.autodesk.com
+Host: developer.api.autodesk.com
 Content-Type: application/json
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Cache-Control: no-cache
@@ -143,12 +143,12 @@ To send a print job to the printer simulator - use the Print Job Create API. Thi
 
 ```
 POST /api/v1/print/printers/58/jobs HTTP/1.1
-Host: sandbox.spark.autodesk.com
+Host: developer.api.autodesk.com
 Authorization: Bearer jDG4YLSTAUlI33k79KYJ2f4Q5nAZ
 Content-Type: application/json
 Cache-Control: no-cache
  
-{ "printable_url": "http://cdn.spark.com/print/abcefg", "settings": { "FirstApproachRPM": 6, "FirstZLiftMicrons": 2000, "FirstSeparationMicronsPerSec": 5000, "FirstApproachMicronsPerSec": 5000, "FirstRotationMilliDegrees": 60000 } }
+{ "printable_url": "http://cdn.static.com/print/abcefg", "settings": { "FirstApproachRPM": 6, "FirstZLiftMicrons": 2000, "FirstSeparationMicronsPerSec": 5000, "FirstApproachMicronsPerSec": 5000, "FirstRotationMilliDegrees": 60000 } }
  
 Response:
 {
@@ -167,7 +167,7 @@ Your app can view the job's status with the Print Job Status API. This will retu
 
 ```
 GET /api/v1/print/jobs/44964c43-176e-43a5-b36c-7694054fe028 HTTP/1.1
-Host: sandbox.spark.autodesk.com
+Host: developer.api.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
  
@@ -197,11 +197,11 @@ Response:
 Commands can be sent to the printer simulator using the Command Send API. 
 While general printer commands such as calibrate, firmware_upgrade and logs, return dummy data, "pause", "cancel" and "resume" commands have an actual impact on the (virtually) running print job.  
 
-Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See the Spark Print API's <a href="https://spark.autodesk.com/developers/reference/print?deeplink=%2Freference%2Fprinter-management" target="_blank">Printer Management section</a>) for more information:
+Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See the Forge Print API's <a href="https://developer.api.autodesk.com" target="_blank">Printer Management section</a>) for more information:
 
 ```
 POST /api/v1/print/printers/58/command HTTP/1.1
-Host: sandbox.spark.autodesk.com
+Host: developer.api.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
@@ -217,7 +217,7 @@ Commands are asynchronous so the result of a command is a task. To check the sta
 
 ```
 GET /api/v1/print/printers/command/bf16cf49-86d9-4c7a-8aa4-90e18eb1b689 HTTP/1.1
-Host: sandbox.spark.autodesk.com
+Host: developer.api.autodesk.com
 Authorization: Bearer S787KIuuBJAH43QU2FgaROqUCC8S
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
