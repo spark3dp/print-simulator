@@ -2,9 +2,9 @@
 ##Introduction
 The Printer Simulator allows app developers to test the Forge <a href="https://developer.autodesk.com" target="_blank">Print API</a> without requiring a physical printer.
 It provides all the same functionality as a "regular" 3D printer, however its 3D printing is virtual.
-The printer simulator also acts as a reference implementation for printer firmware designers.
+The Printer Simulator also acts as a reference implementation for printer firmware designers.
 
-<b>To see the Forge API documentation and make meaningful use of the Print Simulator, please sign up to the developers' portal at
+<b>To see the Forge API documentation and make meaningful use of the Print Simulator, please sign up to the developers portal at
  <a href="https://developer.autodesk.com" target="_blank">https://developer.autodesk.com</a>.</b>
 
 ##Contents
@@ -13,14 +13,14 @@ The printer simulator also acts as a reference implementation for printer firmwa
 3. Calling the Printer Simulator from an App
 
 ###1. Getting Started
-Printer Simulator is a simple HTML/Javascript page, it requires no client side setup except the HTML and associated JS and CSS files.  
+The Printer Simulator is a simple HTML/Javascript page. It requires no client side setup except for the HTML and associated JS and CSS files.  
 1. Download this entire repository.  
-2. The simulator runs as a straight HTML file – no server setup is required – simply open the HTML file in Chrome or Firefox.  
+2. The simulator runs as a straight HTML file – no server setup is required; simply open the HTML file in Chrome or Firefox.  
 3. The simulator has 3 sections: 
 
 a.	The <b>LCD screen</b> mimics a printer display.<br> 
-b.	The <b>Log</b> reports printer activity, debug messages sent to Forge cloud services and the storage state of the printer (token, registration state etc.). <br> 
-c.	<b>Buttons</b> allow you to perform registration, health check (report the printer's online/offline status) and print job control (resume, pause, cancel).
+b.	The <b>log</b> reports printer activity, debug messages sent to Forge cloud services, and the storage state of the printer (token, registration state, etc.). <br> 
+c.	The <b>buttons</b> allow you to perform registration, health checks (report the printer's online/offline status), and use the print job controls (resume, pause, cancel).
 
 ###2. The Printer Simulator Interface
 
@@ -28,42 +28,43 @@ c.	<b>Buttons</b> allow you to perform registration, health check (report the pr
 
 <b>New Token</b> - Completely resets the printer state, issuing a new printer ID and requiring members who have registered to use the printer to re-register as if it were a different printer.
 
-<b>Get Token</b> - Returns the locally stored token. Re-registration is not required, the printer ID remains unchanged.
+<b>Get Token</b> - Returns the locally stored token. Re-registration is not required; the printer ID remains unchanged.
 
 <h4>b. Health Check buttons</h4>
 
-<b>Online</b> - The printer simulator sends regular messages to the Forge server ("Health Checks") notifying of its status. Print jobs and Commands can be sent to the printer simulator.
+<b>Online</b> - The Printer Simulator sends regular messages to the Forge server ("Health Checks") notifying it of its status. Print jobs and commands can be sent to the Printer Simulator.
 
-<b>Offline</b> - The printer simulator does not communicate with the Forge server. No print jobs or commands can be sent to the printer simulator.
+<b>Offline</b> - The Printer Simulator does not communicate with the Forge server. No print jobs or commands can be sent to the Printer Simulator.
 
 <h4>c. Print buttons</h4>
 
-<b>Resume</b> - Resume printing a paused print job: Only active if the printer simulator is "printing" a print job and the Pause button was pressed. The printer simulator will send a status check message to the Forge server, saying it has resumed work.
+<b>Resume</b> - Resume printing a paused print job: Only active if the Printer Simulator is "printing" a print job and the pause button was pressed. The Printer Simulator will send a status check message to the Forge server, saying it has resumed printing.
 
-<b>Pause</b> - Pause printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Forge server saying that it is paused.
+<b>Pause</b> - Pause printing an active print job: Only active if the Printer Simulator is "printing" a print job. The Printer Simulator will send a status check message to the Forge server saying that it has paused.
 
-<b>Cancel</b> - Cancel printing an active print job: Only active if the printer simulator is "printing" a print job. The printer simulator will send a status check message to the Forge server saying that it is paused.
+<b>Cancel</b> - Cancel printing an active print job: Only active if the Printer Simulator is "printing" a print job. The Printer Simulator will send a status check message to the Forge server saying that it has paused.
 
 <h4>d. Local Print Job buttons</h4>
 
-<b>Local</b> - Start printing a virtual print job on the print simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Forge server of the local print job and apps can send commands to the printer simulator affecting the print job.
+<b>Local</b> - Start printing a virtual print job on the Print Simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Forge server of the local print job, and apps can send commands to the Printer Simulator that affect the print job.
 
 ###3. Calling the Printer Simulator from an App
-Except for Authentication API calls, all the API calls shown below are documented in the Forge <a href="https://developer.autodesk.com" target="_blank">Print API</a> section.
+Except for Authentication API calls, all the endpoint calls shown below are documented in the Forge <a href="https://developer.autodesk.com" target="_blank">3D Print API</a> section.
 
 <h4> a. Authentication </h4>
-All API calls originating from the application require an Authorization header with an "access-token".
-For a guide to obtaining an access-token see our tutorial on <a href="https://developer.autodesk.com" target="_blank">Generating an Access Token</a> and/or the <a href="https://developer.autodesk.com" target="_blank">Authentication API</a> documentation.
+All endpoint calls originating from the application, require an Authorization header with an "access-token".
+For a guide about obtaining an access-token, see our tutorial on <a href="https://developer.autodesk.com" target="_blank">Generating an Access Token</a> and/or the <a href="https://developer.autodesk.com" target="_blank">Authentication API</a> documentation.
 
-<h4> b. Testing REST API calls</h4>
-API calls can be tested from our Print API documentation or by using a REST client such as Postman so you can update the token in a single location without having to update each end point. 
+<h4> b. Testing REST endpoint calls</h4>
+Endpoint calls can be tested using our 3D Print API documentation or by using a REST client such as Postman, so you can update the token in a single location without needing to update each endpoint.
 
-<h4>c. Registering to use the printer simulator</h4>
-Unless you register to use the printer simulator you will not be able to send any jobs or commands to it from an app.
+<h4>c. Registering to use the Printer Simulator</h4>
+Unless you register to use the Printer Simulator you will not be able to send any jobs or commands to it from an app.
 
-1. Click “New Token” to have the printer connect to the Forge server and retrieve a registration code. The registration token will be displayed on the Print Simulator's log. This registers you as the print simulator's "printer owner".
-2. Call the Printer Register API (see the Print API's <a href="https://developer.autodesk.com" target="_blank">Printer Registration section</a>).  
+1. Click <b>New Token</b> to connect the printer to the Forge server and retrieve a registration code. The registration code will be displayed on the Print Simulator's log. This registers you as the "printer owner" of the Print Simulator.
+2. Call the <a href="https://developer.autodesk.com" target="_blank">POST printers/registration_code</a> endpoint.  
 The following example uses the <a href="https://www.getpostman.com/" target="_blank">Postman REST client</a>.
+
 ```
 POST /api/v1/print/printers/register HTTP/1.1
 Host: developer.api.autodesk.com
@@ -79,12 +80,12 @@ Response:
     "printer_id": 58
 }
 ```
-The print simulator actively listens for registration events. Calling the Printer Register API will cause the Forge server to notify the print simulator that a registration has taken place and a message will appear in the log:
+The Print Simulator actively listens for registration events. Calling the POST printers/registration_code endpoint will cause the Forge server to notify the Print Simulator that a registration has taken place and a message will appear in the log:
 ```
 Received message from server:{"registration":"success","type":"primary","printer_id":58,"member_id":20711941}
 ```
 <h4>d. Making a health check</h4>
-Once the printer is registered, it will start sending health check messages to the server - the printer simulator is configured to send a message every 60 seconds. The following message appears in the log:  
+Once the printer is registered, it will start sending health check messages to the server - the Printer Simulator is configured to send a message every 60 seconds. The following message appears in the log:  
 
 ```
 sending health check ping with auth code:WfsVvaD84sN3wQoygfNK-JqmB4pvJko5Mrl2xgUFBzM
@@ -92,7 +93,7 @@ POST data:{"printer_status":"ready"}
 Sending POST request to: http://developer.api.autodesk.com/api/v1/print/printers/status
 Server response status 200
 ```
-If the printer is sending health checks regularly - it will appear as online. The application can check the printer simulator's online/offline status by calling the Printer Status Check API (see the Print API's <a href="https://developer.autodesk.com" target="_blank">Printer Management section</a>):
+If the printer is sending health checks regularly, it will appear as online. The application can check the Printer Simulator's online/offline status by calling the <a href="https://developer.autodesk.com" target="_blank">GET printers/status/:printer_id</a> endpoint:
 
 ```
 GET /api/v1/print/printers/status/58 HTTP/1.1
@@ -128,7 +129,7 @@ Response:
             
 ```
 
-You can stop the printer from sending health checks by clicking the "Offline" button. Once the last_check_in value exceeds 60 seconds, the status for GET healthcheck will automatically flip to "offline"
+You can stop the printer from sending health checks by clicking the <b>Offline</b> button. Once the ``last_check_in`` value exceeds 60 seconds, the health check status automatically switches to <b>Offline</b>.
 
 ```
 {
@@ -137,9 +138,9 @@ You can stop the printer from sending health checks by clicking the "Offline" bu
 }
 ```
 
-<h4>e. Sending print jobs to the printer simulator</h4>
+<h4>e. Sending print jobs to the Printer Simulator</h4>
 Once the printer is registered, it actively listens for incoming commands. 
-To send a print job to the printer simulator - use the Print Job Create API. This returns a job id which you can use to check the print job's status or pause/cancel the job. 
+To send a print job to the Printer Simulator, use the POST printers/:printer_id/jobs endpoint. This returns a ``job_id``, which you can use to check the print job's ``status`` or pause/cancel the job. 
 
 ```
 POST /api/v1/print/printers/58/jobs HTTP/1.1
@@ -163,7 +164,7 @@ The printer will start "printing" the job and display appropriate messages in th
 POST data:{"printer_status":"printing","progress":0.88,"job_id":"44964c43-176e-43a5-b36c-7694054fe028","job_progress":0.88,"job_status":"printing","data":{"job_status":"printing","total_layers":50,"layer":44,"seconds_left":120,"temprature":71,"job_id":"44964c43-176e-43a5-b36c-7694054fe028"}}
 ```
 
-Your app can view the job's status with the Print Job Status API. This will return the current status of the job.
+Your app can view the job's status with the <a href="https://developer.autodesk.com" target="_blank">GET jobs/:job_id</a> endpoint. This will return the current status of the job.
 
 ```
 GET /api/v1/print/jobs/44964c43-176e-43a5-b36c-7694054fe028 HTTP/1.1
@@ -193,11 +194,11 @@ Response:
     "local_job": false
 }
 ```
-<h4> f. Sending commands to the printer simulator</h4>
-Commands can be sent to the printer simulator using the Command Send API. 
-While general printer commands such as calibrate, firmware_upgrade and logs, return dummy data, "pause", "cancel" and "resume" commands have an actual impact on the (virtually) running print job.  
+<h4> f. Sending commands to the Printer Simulator</h4>
+Commands can be sent to the Printer Simulator using the POST printers/:printer_id/command endpoint. 
+While general printer commands such as ``calibrate``, ``firmware_upgrade``, and ``log``, return dummy data, ``pause``, ``cancel``, and ``resume`` commands have an actual impact on the (virtual) running print job.  
 
-Commands with a job scope (pause/resume/cancel) require a job_id as a parameter. See the Forge Print API's <a href="https://developer.api.autodesk.com" target="_blank">Printer Management section</a>) for more information:
+Commands with a job scope (pause/resume/cancel) require a ``job_id`` as a parameter. See the Forge 3D Print API <a href="https://developer.api.autodesk.com" target="_blank">Printer Management section</a>) for more information:
 
 ```
 POST /api/v1/print/printers/58/command HTTP/1.1
@@ -213,7 +214,7 @@ Response:
     "task_id": "bf16cf49-86d9-4c7a-8aa4-90e18eb1b689"
 }
 ```
-Commands are asynchronous so the result of a command is a task. To check the status of the task use the Command Status API:
+Commands are asynchronous so the result of a command is a task. To check the status of the task use the GET printers/command/:task_id endpoint:
 
 ```
 GET /api/v1/print/printers/command/bf16cf49-86d9-4c7a-8aa4-90e18eb1b689 HTTP/1.1
@@ -241,6 +242,6 @@ Response:
     "command": "resume"
 }
 ```
-In addition you will notice that the layers have stopped processing on the printer simulator.
-Please note that you can also trigger pause, resume, cancel from the print simulator UI. They have the same impact on updating the print job status and the running job in the simulator. 
+In addition you will notice that the layers have stopped processing on the Printer Simulator.
+Please note that you can also trigger pause, resume, and cancel from the Print Simulator UI. They have the same impact on updating the print job status and the running job in the simulator. 
 
