@@ -1,10 +1,10 @@
 # Printer Simulator
 ##Introduction
-The Printer Simulator allows app developers to test the Forge <a href="https://developer.autodesk.com" target="_blank">Print API</a> without requiring a physical printer.
+The Printer Simulator allows app developers to test the Forge <a href="https://developer.autodesk.com/en/docs/print/v1/overview/" target="_blank">3D Print API</a> without requiring a physical printer.
 It provides all the same functionality as a "regular" 3D printer, however its 3D printing is virtual.
 The Printer Simulator also acts as a reference implementation for printer firmware designers.
 
-<b>To see the Forge API documentation and make meaningful use of the Print Simulator, please sign up to the developers portal at
+<b>To see the Forge API documentation and make meaningful use of the Printer Simulator, sign up to the developers portal at
  <a href="https://developer.autodesk.com" target="_blank">https://developer.autodesk.com</a>.</b>
 
 ##Contents
@@ -15,12 +15,13 @@ The Printer Simulator also acts as a reference implementation for printer firmwa
 ###1. Getting Started
 The Printer Simulator is a simple HTML/Javascript page. It requires no client side setup except for the HTML and associated JS and CSS files.  
 1. Download this entire repository.  
-2. The simulator runs as a straight HTML file – no server setup is required; simply open the HTML file in Chrome or Firefox.  
-3. The simulator has 3 sections: 
+2. Open the HTML file in Chrome or Firefox. Since the simulator runs as a straight HTML file, no server setup is required.
 
-a.	The <b>LCD screen</b> mimics a printer display.<br> 
-b.	The <b>log</b> reports printer activity, debug messages sent to Forge cloud services, and the storage state of the printer (token, registration state, etc.). <br> 
-c.	The <b>buttons</b> allow you to perform registration, health checks (report the printer's online/offline status), and use the print job controls (resume, pause, cancel).
+The simulator has 3 sections: 
+
+a.	The <b>LCD screen</b>, which mimics a printer display.<br> 
+b.	The <b>log</b>, which reports printer activity, debug messages sent to Forge cloud services, and the storage state of the printer (token, registration state, etc.). <br> 
+c.	The <b>buttons</b>, which allow you to register a printer, perform health checks (report the printer's online/offline status), and control print jobs (resume, pause, cancel).
 
 ###2. The Printer Simulator Interface
 
@@ -32,7 +33,7 @@ c.	The <b>buttons</b> allow you to perform registration, health checks (report t
 
 <h4>b. Health Check buttons</h4>
 
-<b>Online</b> - The Printer Simulator sends regular messages to the Forge server ("Health Checks") notifying it of its status. Print jobs and commands can be sent to the Printer Simulator.
+<b>Online</b> - The Printer Simulator sends regular messages (health checks) to the Forge server notifying it of its status. Print jobs and commands can be sent to the Printer Simulator.
 
 <b>Offline</b> - The Printer Simulator does not communicate with the Forge server. No print jobs or commands can be sent to the Printer Simulator.
 
@@ -46,13 +47,13 @@ c.	The <b>buttons</b> allow you to perform registration, health checks (report t
 
 <h4>d. Local Print Job buttons</h4>
 
-<b>Local</b> - Start printing a virtual print job on the Print Simulator. This print job is "locally initiated" and not one sent by an app. If the printer is online it will notify the Forge server of the local print job, and apps can send commands to the Printer Simulator that affect the print job.
+<b>Local</b> - Start printing a virtual print job on the Printer Simulator. This print job is "locally initiated" and not sent by an app. If the printer is online it will notify the Forge server of the local print job, and apps can send commands to the Printer Simulator that affect the print job.
 
 ###3. Calling the Printer Simulator from an App
 Except for Authentication API calls, all the endpoint calls shown below are documented in the Forge <a href="https://developer.autodesk.com" target="_blank">3D Print API</a> section.
 
 <h4> a. Authentication </h4>
-All endpoint calls originating from the application, require an Authorization header with an "access-token".
+All endpoint calls originating from the application require an Authorization header with an "access-token".
 For a guide about obtaining an access-token, see our tutorial on <a href="https://developer.autodesk.com" target="_blank">Generating an Access Token</a> and/or the <a href="https://developer.autodesk.com" target="_blank">Authentication API</a> documentation.
 
 <h4> b. Testing REST endpoint calls</h4>
@@ -61,7 +62,7 @@ Endpoint calls can be tested using our 3D Print API documentation or by using a 
 <h4>c. Registering to use the Printer Simulator</h4>
 Unless you register to use the Printer Simulator you will not be able to send any jobs or commands to it from an app.
 
-1. Click <b>New Token</b> to connect the printer to the Forge server and retrieve a registration code. The registration code will be displayed on the Print Simulator's log. This registers you as the "printer owner" of the Print Simulator.
+1. Click <b>New Token</b> to connect the printer to the Forge server and retrieve a registration code. The registration code will be displayed on the Printer Simulator's log. This registers you as the "printer owner" of the Printer Simulator.
 2. Call the <a href="https://developer.autodesk.com" target="_blank">POST printers/registration_code</a> endpoint.  
 The following example uses the <a href="https://www.getpostman.com/" target="_blank">Postman REST client</a>.
 
@@ -80,7 +81,7 @@ Response:
     "printer_id": 58
 }
 ```
-The Print Simulator actively listens for registration events. Calling the POST printers/registration_code endpoint will cause the Forge server to notify the Print Simulator that a registration has taken place and a message will appear in the log:
+The Printer Simulator actively listens for registration events. Calling the POST printers/registration_code endpoint will cause the Forge server to notify the Printer Simulator that a registration has taken place and a message will appear in the log:
 ```
 Received message from server:{"registration":"success","type":"primary","printer_id":58,"member_id":20711941}
 ```
