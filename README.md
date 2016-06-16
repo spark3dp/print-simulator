@@ -50,11 +50,11 @@ c.	The <b>buttons</b>, which allow you to register a printer, perform health che
 <b>Local</b> - Start printing a virtual print job on the Printer Simulator. This print job is "locally initiated" and not sent by an app. If the printer is online it will notify the Forge server of the local print job, and apps can send commands to the Printer Simulator that affect the print job.
 
 ###3. Calling the Printer Simulator from an App
-Except for Authentication API calls, all the endpoint calls shown below are documented in the Forge <a href="https://developer.autodesk.com" target="_blank">3D Print API</a> section.
+Except for Authentication API calls, all the endpoint calls shown below are documented in the Forge <a href="https://developer.autodesk.com/en/docs/print/v1/overview/" target="_blank">3D Print API</a> section.
 
 <h4> a. Authentication </h4>
 All endpoint calls originating from the application require an Authorization header with an "access-token".
-For a guide about obtaining an access-token, see our tutorial on <a href="https://developer.autodesk.com" target="_blank">Generating an Access Token</a> and/or the <a href="https://developer.autodesk.com" target="_blank">Authentication API</a> documentation.
+For a guide about obtaining an access-token, see our tutorial on <a href="https://developer.autodesk.com/en/docs/oauth/v2/tutorials/" target="_blank">Generating an Access Token</a> and/or the <a href="https://developer.autodesk.com" target="_blank">Authentication API</a> documentation.
 
 <h4> b. Testing REST endpoint calls</h4>
 Endpoint calls can be tested using our 3D Print API documentation or by using a REST client such as Postman, so you can update the token in a single location without needing to update each endpoint.
