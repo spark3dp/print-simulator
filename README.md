@@ -94,7 +94,7 @@ POST data:{"printer_status":"ready"}
 Sending POST request to: http://developer.api.autodesk.com/api/v1/print/printers/status
 Server response status 200
 ```
-If the printer is sending health checks regularly, it will appear as ``online``. The application can check the Printer Simulator's online/offline status by calling the <a href="https://developer.autodesk.com" target="_blank">GET printers/status/:printer_id</a> endpoint:
+If the printer is sending health checks regularly, it will appear as ``online``. The application can check the Printer Simulator's online/offline status by calling the <a href="https://developer.autodesk.com/en/docs/print/v1/reference/http/printers-status-printer_id-GET/" target="_blank">GET printers/status/:printer_id</a> endpoint:
 
 ```
 GET /api/v1/print/printers/status/58 HTTP/1.1
